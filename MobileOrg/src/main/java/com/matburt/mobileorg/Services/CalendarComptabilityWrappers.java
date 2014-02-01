@@ -15,6 +15,7 @@ public class CalendarComptabilityWrappers {
 	public intCalendars calendars = new intCalendars();
 	public intReminders reminders = new intReminders();
 	public intCalendarAlerts calendarAlerts = new intCalendarAlerts();
+    public intRepeating repeating = new intRepeating();
 	private Context context;
 
 	public String[] eventsProjection;
@@ -73,8 +74,17 @@ public class CalendarComptabilityWrappers {
 		public String STATE = "state";
 		public int STATE_SCHEDULED = 0;
 	};
-	
-	/**
+
+    public class intRepeating {
+        public String RepeatRule = "rrule";
+        public String Frequency = "FREQ";
+        public String Interval = "INTERVAL";
+        public String WeekStart = "WKST";
+        public String Sunday = "SU";
+        public String Duration = "duration";
+    };
+
+    /**
 	 * Hack to support phones with Android <3.0
 	 */
 	@SuppressLint("NewApi")

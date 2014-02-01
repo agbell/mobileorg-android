@@ -70,6 +70,15 @@ public class CalendarWrapper {
 				+ filename + "\n" + payload);
 		values.put(calendar.events.EVENT_LOCATION, location);
 
+        if(date.isRepeating){
+            values.put(calendar.repeating.RepeatRule,
+                    calendar.repeating.Frequency + "=" + date.repeatingFrequency +";"
+                  + calendar.repeating.Interval + "=" + date.repeatingInterval + ";"
+                  + calendar.repeating.WeekStart + "=" + calendar.repeating.Sunday + ";"
+            );
+            values.put(calendar.repeating.Duration, date.endTime);
+        }
+
 		// If a busy state was given, send that info to calendar
 		if (busy != null) {
 			// Trying to be reasonably tolerant with respect to the accepted values.
@@ -89,7 +98,9 @@ public class CalendarWrapper {
 		// values.put(intEvents.ORGANIZER, embeddedNodeMetadata);
 
 		values.put(calendar.events.DTSTART, date.beginTime);
-		values.put(calendar.events.DTEND, date.endTime);
+        if(!date.isRepeating){
+		    values.put(calendar.events.DTEND, date.endTime);
+        }
 		values.put(calendar.events.ALL_DAY, date.allDay);
 		values.put(calendar.events.HAS_ALARM, 0);
 		values.put(calendar.events.EVENT_TIMEZONE, Time.getCurrentTimezone());

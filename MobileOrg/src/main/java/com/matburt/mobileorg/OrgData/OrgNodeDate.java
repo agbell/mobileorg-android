@@ -15,6 +15,9 @@ public class OrgNodeDate {
 	public long endTime = 0;
 	public int allDay = 0;
 	public String type = "";
+    public boolean isRepeating = true;
+    public int repeatingInterval = 2;
+    public String repeatingFrequency = "WEEKLY";
 	private String title = "";
 
 	private static final SimpleDateFormat dateTimeformatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -33,7 +36,7 @@ public class OrgNodeDate {
 	
 	public OrgNodeDate (String date) throws IllegalArgumentException {
 		Matcher schedule = schedulePattern.matcher(date);
-
+        Log.e("MobileOrg","Date string:" + date);
 		if (schedule.find()) {
 			try {
 				if(schedule.group(BEGIN_TIME) == null) { // event is an entire day event
